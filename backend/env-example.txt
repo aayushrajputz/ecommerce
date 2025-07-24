@@ -1,0 +1,50 @@
+# Environment Configuration for E-Commerce Backend
+# Copy this file to .env and fill in your actual values
+
+# Server Configuration
+NODE_ENV=development
+PORT=5000
+
+# Database Configuration
+# For local MongoDB:
+MONGO_URI=mongodb://localhost:27017/ecommerce
+# For MongoDB Atlas:
+# MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/ecommerce?retryWrites=true&w=majority
+
+# JWT Configuration
+JWT_SECRET=your-super-secret-jwt-key-make-it-very-long-and-secure
+JWT_EXPIRE=30d
+JWT_COOKIE_EXPIRE=30
+
+# Client Configuration
+CLIENT_URL=http://localhost:3000
+
+# Stripe Payment Configuration
+STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key_here
+STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key_here
+STRIPE_WEBHOOK_SECRET=whsec_your_stripe_webhook_secret_here
+
+# Razorpay Payment Configuration
+RAZORPAY_KEY_ID=rzp_test_your_razorpay_key_id_here
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret_here
+RAZORPAY_WEBHOOK_SECRET=your_razorpay_webhook_secret_here
+
+# Email Configuration (Optional - for future features)
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASSWORD=your-app-password
+
+# File Upload Configuration
+UPLOAD_PATH=./uploads
+MAX_FILE_SIZE=5242880
+
+# Redis Configuration (Optional - for caching)
+REDIS_URL=redis://localhost:6379
+
+# Additional Security
+RATE_LIMIT_WINDOW=15
+RATE_LIMIT_MAX=100
+
+# Logging
+LOG_LEVEL=info
