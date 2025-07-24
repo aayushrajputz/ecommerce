@@ -193,6 +193,23 @@ router.post('/razorpay/create-order', [
   }
 }));
 
+// @desc    Create Razorpay order
+// @route   POST /api/payments/razorpay/order
+// @access  Public
+router.post('/razorpay/order', asyncHandler(async (req, res) => {
+  const { amount } = req.body;
+  try {
+    const order = await razorpay.orders.create({
+      amount: amount * 100, // amount in paise
+      currency: 'INR',
+      payment_capture: 1,
+    });
+    res.json({ orderId: order.id, key: process.env.RAZORPAY_KEY_ID });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to create Razorpay order' });
+  }
+}));
+
 // @desc    Verify Razorpay payment
 // @route   POST /api/payments/razorpay/verify
 // @access  Private
