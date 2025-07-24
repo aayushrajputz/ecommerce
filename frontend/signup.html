@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - ShopHub</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: linear-gradient(120deg, #232526 0%, #414345 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .auth-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      padding: 2.5rem 2rem 2rem 2rem;
+      max-width: 370px;
+      width: 100%;
+      margin: 2rem auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.7s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .auth-card h2 {
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      color: #232526;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .auth-card form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .auth-card input {
+      padding: 0.75rem 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .auth-card input:focus {
+      border: 1.5px solid #3399cc;
+    }
+    .auth-card button {
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #3399cc 0%, #6dd5ed 100%);
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s;
+    }
+    .auth-card button:hover {
+      background: linear-gradient(90deg, #257ba6 0%, #3399cc 100%);
+    }
+    #auth-error, #otp-error {
+      color: #e74c3c;
+      margin-top: 0.5rem;
+      min-height: 1.2em;
+      text-align: center;
+    }
+    .auth-footer {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+    .auth-footer a {
+      color: #3399cc;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .auth-footer a:hover {
+      color: #257ba6;
+      text-decoration: underline;
+    }
+    @media (max-width: 500px) {
+      .auth-card {
+        padding: 1.5rem 0.5rem 1.5rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-card">
+    <h2>Create Account</h2>
+    <form id="signup-form">
+      <input type="text" id="signup-name" placeholder="Full Name" required />
+      <input type="email" id="signup-email" placeholder="Email address" required />
+      <input type="password" id="signup-password" placeholder="Password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+    <div id="auth-error"></div>
+    <form id="otp-form" style="display:none;flex-direction:column;gap:1rem;width:100%;margin-top:1.5rem;">
+      <input type="text" id="otp-input" placeholder="Enter OTP sent to your email" required maxlength="6" />
+      <button type="submit">Verify OTP</button>
+    </form>
+    <div id="otp-error"></div>
+    <div class="auth-footer">
+      <a href="login.html">&larr; Back to Login</a>
+    </div>
+  </div>
+  <script>
+    const signupForm = document.getElementById('signup-form');
+    const otpForm = document.getElementById('otp-form');
+    const authError = document.getElementById('auth-error');
+    const otpError = document.getElementById('otp-error');
+    let signupEmail = '';
+
+    signupForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const name = document.getElementById('signup-name').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      authError.textContent = '';
+      otpError.textContent = '';
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.message || 'Signup failed');
+        }
+        signupEmail = email;
+        signupForm.style.display = 'none';
+        otpForm.style.display = 'flex';
+        authError.textContent = 'Check your email for the OTP.';
+      } catch (err) {
+        authError.textContent = err.message;
+      }
+    });
+
+    otpForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const otp = document.getElementById('otp-input').value;
+      otpError.textContent = '';
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/verify-email-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: signupEmail, otp })
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.message || 'OTP verification failed');
+        }
+        window.location.href = 'login.html';
+      } catch (err) {
+        otpError.textContent = err.message;
+      }
+    });
+  </script>
+</body>
+</html> 

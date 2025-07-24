@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopHub - Premium E-commerce Experience</title>
+    <meta name="description" content="Discover premium products with exceptional shopping experience">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <p>Loading ShopHub...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__logo">
+                    <h1 class="logo">ShopHub</h1>
+                </div>
+                
+                <nav class="header__nav">
+                    <a href="#home" class="nav-link active" data-page="home">Home</a>
+                    <a href="#products" class="nav-link" data-page="products">Products</a>
+                </nav>
+
+                <div class="header__actions">
+                    <div class="search-wrapper">
+                        <input type="text" id="global-search" class="search-input" placeholder="Search products...">
+                        <div class="search-suggestions" id="search-suggestions"></div>
+                    </div>
+                    <button class="cart-button" id="cart-button">
+                        <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="m1 1 4 4 1.68 8.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </button>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <button class="btn btn--primary" id="login-btn" onclick="window.location.href='login.html'">Login / Signup</button>
+                    <button class="btn btn--secondary" id="logout-btn" style="display:none;">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <div id="home-page" class="page">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero__content">
+                        <h1 class="hero__title">Discover Premium Products</h1>
+                        <p class="hero__subtitle">Shop the latest tech, fashion, and home products with exceptional quality</p>
+                        <div class="hero__search">
+                            <input type="text" id="hero-search" class="hero__search-input" placeholder="What are you looking for?">
+                            <button class="btn btn--primary" id="hero-search-btn">Search</button>
+                        </div>
+                        <div class="hero__stats">
+                            <div class="stat">
+                                <span class="stat__number" id="total-products">15</span>
+                                <span class="stat__label">Products</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat__number">1K+</span>
+                                <span class="stat__label">Happy Customers</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat__number">24/7</span>
+                                <span class="stat__label">Support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Products -->
+            <section class="featured-products">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Featured Products</h2>
+                        <button class="btn btn--outline" data-page="products">View All</button>
+                    </div>
+                    <div class="products-carousel" id="featured-products"></div>
+                </div>
+            </section>
+
+            <!-- Categories -->
+            <section class="categories-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Shop by Category</h2>
+                    </div>
+                    <div class="categories-grid" id="categories-grid"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Products Page -->
+        <div id="products-page" class="page hidden">
+            <div class="container">
+                <div class="products-layout">
+                    <aside class="filters-sidebar" id="filters-sidebar">
+                        <div class="filters-header">
+                            <h3>Filters</h3>
+                            <button id="clear-filters">Clear All</button>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h4>Search</h4>
+                            <input type="text" id="product-search" class="form-control" placeholder="Search products...">
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h4>Category</h4>
+                            <div class="filter-options" id="category-filters"></div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h4>Brand</h4>
+                            <div class="filter-options" id="brand-filters"></div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h4>Price Range</h4>
+                            <div class="price-range">
+                                <input type="range" id="price-min" min="0" max="3500" value="0" step="50">
+                                <input type="range" id="price-max" min="0" max="3500" value="3500" step="50">
+                                <div class="price-display">
+                                    <span>$<span id="price-min-display">0</span></span>
+                                    <span>$<span id="price-max-display">3500</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h4>Availability</h4>
+                            <div class="filter-options">
+                                <label>
+                                    <input type="checkbox" id="in-stock-only" value="inStock">
+                                    In Stock Only
+                                </label>
+                            </div>
+                        </div>
+                    </aside>
+                    
+                    <div class="products-content">
+                        <div class="products-header">
+                            <div class="results-info">
+                                <span id="products-count">0 products found</span>
+                            </div>
+                            <div class="sort-options">
+                                <select id="sort-select" class="form-control">
+                                    <option value="name-asc">Name A-Z</option>
+                                    <option value="name-desc">Name Z-A</option>
+                                    <option value="price-asc">Price: Low to High</option>
+                                    <option value="price-desc">Price: High to Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="products-grid" id="products-grid"></div>
+                        
+                        <div class="no-results hidden" id="no-results">
+                            <div class="card">
+                                <div class="card__body">
+                                    <h3>Out of Stock</h3>
+                                    <p>No products match your current search and filter criteria. Try adjusting your filters or search for different products.</p>
+                                    <button class="btn btn--primary" id="reset-search">Reset Filters</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart Page -->
+        <div id="cart-page" class="page hidden">
+            <div class="container">
+                <h2>Shopping Cart</h2>
+                <div class="cart-layout">
+                    <div class="cart-items" id="cart-items">
+                        <div class="empty-cart" id="empty-cart">
+                            <div class="card">
+                                <div class="card__body">
+                                    <h3>Your cart is empty</h3>
+                                    <p>Start shopping to add items to your cart</p>
+                                    <button class="btn btn--primary" data-page="products">Continue Shopping</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-summary" id="cart-summary">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Order Summary</h3>
+                                <div class="summary-row">
+                                    <span>Subtotal:</span>
+                                    <span id="cart-subtotal">$0.00</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Shipping:</span>
+                                    <span id="cart-shipping">Free</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Tax:</span>
+                                    <span id="cart-tax">$0.00</span>
+                                </div>
+                                <hr>
+                                <div class="summary-row total">
+                                    <span>Total:</span>
+                                    <span id="cart-total">$0.00</span>
+                                </div>
+                                <button class="btn btn--primary btn--full-width" id="checkout-btn">Proceed to Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3>ShopHub</h3>
+                    <p>Your premium shopping destination for quality products and exceptional service.</p>
+                </div>
+                <div class="footer__section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home" data-page="home">Home</a></li>
+                        <li><a href="#products" data-page="products">Products</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#returns">Returns</a></li>
+                        <li><a href="#shipping">Shipping Info</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#" target="_blank">Facebook</a>
+                        <a href="#" target="_blank">Twitter</a>
+                        <a href="#" target="_blank">Instagram</a>
+                        <a href="#" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2024 ShopHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu">
+            <button class="mobile-menu__close" id="mobile-menu-close">&times;</button>
+            <nav class="mobile-menu__nav">
+                <a href="#home" class="mobile-nav-link" data-page="home">Home</a>
+                <a href="#products" class="mobile-nav-link" data-page="products">Products</a>
+                <a href="#cart" class="mobile-nav-link" data-page="cart">Cart</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Login/Signup Modal -->
+    <div id="auth-modal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <span class="close" id="close-auth-modal">&times;</span>
+        <h2>Login / Signup</h2>
+        <form id="auth-form">
+          <input type="email" id="auth-email" placeholder="Email" required />
+          <input type="password" id="auth-password" placeholder="Password" required />
+          <button type="submit" class="btn btn--primary">Login / Signup</button>
+        </form>
+        <div id="auth-error" style="color:red; margin-top:10px;"></div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</body>
+</html>
