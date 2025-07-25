@@ -2,7 +2,7 @@
 
 A production-ready e-commerce backend built with Node.js, Express, MongoDB, JWT authentication, and payment integration (Stripe & Razorpay).
 
-## 🚀 Features
+##  Features
 
 ### Core E-Commerce Functionality
 - ✅ **User Authentication & Authorization** - JWT-based with role management
@@ -21,7 +21,7 @@ A production-ready e-commerce backend built with Node.js, Express, MongoDB, JWT 
 - ✅ **Order Status Tracking** - Real-time order status updates
 - ✅ **Security Best Practices** - Rate limiting, input validation, CORS, helmet
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 ecommerce-backend/
@@ -50,7 +50,7 @@ ecommerce-backend/
 └── .env                      # Environment variables
 ```
 
-## 🛠️ Quick Setup
+## 🛠 Quick Setup
 
 ### Prerequisites
 - Node.js 16+ installed
@@ -74,8 +74,7 @@ npm install
 # Create .env file from the provided template
 cp env-example.txt .env
 
-# Edit .env file with your actual configuration
-nano .env
+
 ```
 
 **Required Environment Variables:**
@@ -239,7 +238,7 @@ curl -X POST http://localhost:5000/api/orders \
   }'
 ```
 
-## 🔐 Security Features
+##  Security Features
 
 - **Password Hashing**: bcrypt with 12 salt rounds
 - **JWT Authentication**: Secure token-based authentication
@@ -249,7 +248,7 @@ curl -X POST http://localhost:5000/api/orders \
 - **Security Headers**: Helmet middleware for HTTP security
 - **Injection Prevention**: MongoDB injection and XSS protection
 
-## 📊 Database Schema
+##  Database Schema
 
 ### Users Collection
 - Authentication info (email, password hash)
@@ -368,7 +367,7 @@ npx kill-port 5000
 
 This project is licensed under the MIT License.
 
-## 🤝 Contributing
+##  Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -376,7 +375,7 @@ This project is licensed under the MIT License.
 4. Add tests if applicable
 5. Submit a pull request
 
-## 📞 Support
+##  Support
 
 For support and questions:
 - Create an issue in the repository
