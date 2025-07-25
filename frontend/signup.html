@@ -154,7 +154,7 @@
       const otp = document.getElementById('otp-input').value;
       otpError.textContent = '';
       try {
-        const response = await fetch('http://localhost:5000/api/auth/verify-email-otp', {
+        const response = await fetch('https://ecommerce-6zo5.onrender.com/api/auth/verify-email-otp', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: signupEmail, otp })
