@@ -29,8 +29,7 @@ class AppState {
 
   async fetchProducts() {
     try {
-      const response = await fetch("https://ecommerce-6zo5.onrender.com/api/products")
-');
+      const response = await fetch("https://ecommerce-6zo5.onrender.com/api/products");
       if (!response.ok) throw new Error('Failed to fetch products');
       const data = await response.json();
       console.log('Fetched products data:', data); // DEBUG LOG
