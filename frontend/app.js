@@ -585,7 +585,7 @@ async function handleCheckout() {
 
   // Call backend to create Razorpay order
   try {
-    const response = await fetch('http://localhost:5000/api/payments/razorpay/order', {
+    const response = await fetch('https://ecommerce-6zo5.onrender.com/api/payments/razorpay/order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ amount })
