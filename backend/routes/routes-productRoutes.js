@@ -32,7 +32,7 @@ router.get('/', [
     sortBy = 'createdAt',
     sortOrder = 'desc',
     page = 1,
-    limit = 12,
+    limit = 50,
     featured
   } = req.query;
 
