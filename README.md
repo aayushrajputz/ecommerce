@@ -1,19 +1,41 @@
 Core E-Commerce Functionality
+
+
+
 ✅ User Authentication & Authorization - JWT-based with role management
+
+
 ✅ Product Catalog Management - Full CRUD with categories, brands, reviews
+
+
 ✅ Shopping Cart System - Persistent cart with coupon support
+
+
 ✅ Order Management - Complete order lifecycle tracking
+
+
 ✅ Payment Integration - Stripe (international) + Razorpay (India) + Cash on Delivery
+
+
 ✅ Product Reviews & Ratings - User review system with 5-star ratings
+
 ✅ Multi-Address Support - Users can manage multiple shipping addresses
 Advanced Features
+
 ✅ Admin Dashboard - Analytics, user management, product management
+
 ✅ Real Product Data - 100+ products with images, descriptions, specifications
+
 ✅ Advanced Filtering - Search by category, price range, rating, keywords
+
 ✅ Inventory Management - Stock tracking with low-stock alerts
+
 ✅ Order Status Tracking - Real-time order status updates
+
 ✅ Security Best Practices - Rate limiting, input validation, CORS, helmet
 Project Structure
+
+
 ecommerce-backend/
 ├── config/
 │   └── db.js                 # Database connection
